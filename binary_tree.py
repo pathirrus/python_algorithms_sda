@@ -1,9 +1,9 @@
-from typing import List
+from typing import List, Optional
 
 
 class Node:
     def __init__(self,
-                 key: int,
+                 key: Optional[int],
                  left: "Node" = None,
                  right: "Node" = None):
 
@@ -61,7 +61,7 @@ class Node:
     #     print(self.key)
 
 
-#nie rekurencyjna metoda:
+#nie rekurencyjna metoda traversu:
 
 def traverse(root: Node) -> List[Node]:
 
@@ -79,19 +79,37 @@ def traverse(root: Node) -> List[Node]:
         #     stack.append(node.right)      bedzie wyciagana wartosc right zamiast left, i bedzie trochę kolejnaość poprzestawiana
 
 
+# data = [1,2,10,9,4,10,11]
+def create_binsearch_tree(root: Node, data: List[int]) -> Node:
+    size = len(data)
+    if size != 0:
+
+        items = sorted(data)
+        size = len(items)
+
+        middle = size // 2
+        root.append(items[middle])
+
+        create_binsearch_tree(root, items[:middle])
+        create_binsearch_tree(root, items[middle+1:])
+    return root
+
 
 if __name__ == "__main__":
     root = Node(key=None)
-    root.append(42)
-    root.append(40)
-    root.append(50)
-    root.append(30)
-    root.append(60)
-    root.append(70)
-
-    #print(root, root.left, root.right, root.left.left, root.right.right)  #kolejne poziomy to kolejne righ.right.left.right ipt itd
-
+    data = [1, 2, 10, 9, 4, 10, 11]
+    root = create_binsearch_tree(Node(key=None), data)
     root.traverse()
+    # root.append(42)
+    # root.append(40)
+    # root.append(50)
+    # root.append(30)
+    # root.append(60)
+    # root.append(70)
 
-    for node in traverse(root):
-        print(node)
+    ##print(root, root.left, root.right, root.left.left, root.right.right)  #kolejne poziomy to kolejne righ.right.left.right ipt itd
+
+    # root.traverse()
+    #
+    # for node in traverse(root):
+    #     print(node)
