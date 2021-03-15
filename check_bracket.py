@@ -1,3 +1,6 @@
+#VER2 błędna sekwencja -> ([)] itp
+# poprawna sekwencja {} [] () ||
+
 def validate(sequence: str) -> bool:
     stack = []
     for char in sequence:
@@ -14,6 +17,6 @@ def validate(sequence: str) -> bool:
 
 
 if __name__ == "__main__":
-    assert validate("(())") == True
+    assert validate("(()){}[]") == True
     assert validate("())") == False
     assert validate("))(") == False
